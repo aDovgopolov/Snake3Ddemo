@@ -25,6 +25,12 @@ public class Snake : MonoBehaviour
 
     public void Movement()
     {
+        if (Grid.IsValidGridPos3D(this))
+        {
+            Grid.UpdateGrid3D(this);
+            //Debug.Log("IsValidGridPos3D");
+        }
+        
         Vector3 direction = CheckFreeSpaceExeptItself();
         
         Vector3 oldPosition  = transform.GetChild(0).transform.position;
@@ -59,32 +65,50 @@ public class Snake : MonoBehaviour
 
     public Vector3 CheckFreeSpaceExeptItself()
     {
-        Vector3 direction = gameObject.transform.GetChild(0).localPosition;
-        Random random = new Random();
-        bool isFreeSpace = false;
+        Vector3 direction = gameObject.transform.GetChild(0).position;
         
-        while (!isFreeSpace)
+        Random random = new Random();
+        Vector3 randomDirectionToMove = directions[random.Next(0, directions.Length) ];
+        
+        bool isFreeSpace = false;
+        direction += randomDirectionToMove;
+        
+        //Grid.GetTransformOnPoint(direction);
+        
+        while (Grid.GetTransformOnPoint(direction))
         {
-            direction += directions[random.Next(0, directions.Length) ];
-            
+            Debug.Log(direction);
+            direction = gameObject.transform.GetChild(0).position;
+            randomDirectionToMove = directions[random.Next(0, directions.Length)];
+            direction += randomDirectionToMove;
+        }
+        
+
+        /*while (!isFreeSpace)
+        {
+            direction += randomDirectionToMove;
+
             //костыль какой-то
             foreach (Transform child in gameObject.transform)
             {
                 Debug.Log($"direction = {direction}  - child.position = {child.position}");
                 if (direction != child.position)
                 {
+
+                    Debug.Log($"before break");
                     isFreeSpace = true;
                     break;
                 }
-                else
-                {
-                    direction = gameObject.transform.GetChild(0).localPosition;
-                    direction +=  directions[random.Next(0, directions.Length) ];
-                }
-            }
-        }
 
-        return direction;
+                Debug.Log($"after break");
+                direction = gameObject.transform.GetChild(0).position;
+                randomDirectionToMove = directions[random.Next(0, directions.Length)];
+                //direction += randomDirectionToMove;
+
+            }
+        }*/
+
+        return randomDirectionToMove;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -109,5 +133,29 @@ public class Snake : MonoBehaviour
             MoveTail(oldPosition);
         }*/
         
+        
+        
+        /*while (!isFreeSpace)
+        {
+            direction += randomDirectionToMove;
+            
+            //костыль какой-то
+            foreach (Transform child in gameObject.transform)
+            {
+                Debug.Log($"direction = {direction}  - child.position = {child.position}");
+                if (direction != child.position)
+                {
+                    isFreeSpace = true;
+                    
+                    Debug.Log($"before break");
+                    break;
+                }
+                
+                Debug.Log($"after break");
+                direction = gameObject.transform.GetChild(0).position;
+                randomDirectionToMove = directions[random.Next(0, directions.Length) ];
+                direction += randomDirectionToMove;
+            }
+        }*/
     }
 }

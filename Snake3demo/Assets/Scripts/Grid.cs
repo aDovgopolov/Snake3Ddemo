@@ -99,7 +99,15 @@ public class Grid : MonoBehaviour
         }
         return true;
     }
-    
-    
-    //public static 
+
+
+    public static bool GetTransformOnPoint(Vector3 vec)
+    {
+        //Debug.Log($"x = {(int)vec.x}");
+        Transform transform = grid3D[(int)vec.x, (int)vec.y, (int)vec.z];
+        Debug.Log($"transform = {transform}");
+        bool isSomething = transform != null;
+        //Debug.Log($"tmp = {tmp}");
+        return isSomething;
+    }
 }
