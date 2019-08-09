@@ -22,23 +22,5 @@ public class loader : MonoBehaviour
         T deserialized = (T)serializer.Deserialize(reader.BaseStream);
         reader.Close();
         return deserialized;
-        /*try
-        {
-           
-        }
-        catch (Exception e) {
-        UnityEngine.Debug.LogError("Exception loading question data: " + e);
-        return null;
-        }*/
-        
-        /*TextAsset xmlData = Resources.Load("riddle") as TextAsset;
-        Debug.Log(xmlData);
-        using (XmlReader reader = XmlReader.Create(new StringReader(xmlData.text)))
-        {
-            while (reader.Read())
-            {
-                Debug.Log(reader.Name);
-            }
-        }*/
     }
 }
