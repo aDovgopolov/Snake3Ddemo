@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Knight xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <name>Knight of Solamnia</name>
+  <isBoss>false</isBoss>
+  <hitPoints>100</hitPoints>
+  <baseDamage>50</baseDamage>
+  <comboRewards>
+    <int>1</int>
+    <int>3</int>
+    <int>5</int>
+  </comboRewards>
+</Knight>

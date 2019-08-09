@@ -10,6 +10,7 @@ public class Grid : MonoBehaviour
     public static Transform[,] grid = new Transform[x, y];
     public static Transform[,,] grid3D = new Transform[x, y, z];
 
+    //------------------------2 D---------------------------------------//
     public static Vector2 RoundVec2(Vector2 v)
     {
         return new Vector2(Mathf.Round(v.x),
@@ -52,7 +53,8 @@ public class Grid : MonoBehaviour
         return true;
     }
     
-    //----------------------------------------------------------------//
+    //------------------------3D---------------------------------------//
+    
     public static Vector3 RoundVec3(Vector3 v)
     {
         return new Vector3(Mathf.Round(v.x),
@@ -103,11 +105,22 @@ public class Grid : MonoBehaviour
 
     public static bool GetTransformOnPoint(Vector3 vec)
     {
-        //Debug.Log($"x = {(int)vec.x}");
+        Debug.Log($"x = {(int)vec.x} - y = {(int)vec.y} - z = {(int)vec.z}");
+        
+        // out of range
+        bool xOutOfRange = (int) vec.x >= 15 || (int) vec.x < 0;
+        bool yOutOfRange = (int) vec.y >= 15 || (int) vec.y < 0;
+        bool zOutOfRange = (int) vec.z >= 15 || (int) vec.z < 0;
+        if (xOutOfRange || yOutOfRange || zOutOfRange)
+        {
+            return true;
+        }
+        
         Transform transform = grid3D[(int)vec.x, (int)vec.y, (int)vec.z];
         Debug.Log($"transform = {transform}");
         bool isSomething = transform != null;
-        //Debug.Log($"tmp = {tmp}");
         return isSomething;
     }
+    
+    
 }

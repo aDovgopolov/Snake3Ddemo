@@ -1,0 +1,11 @@
+﻿<data preset="">
+	<general id="type" type="" value="" _static="TRUE">
+		<item id="snake.count" type="int" value="1" _static=""/>
+		<item id="snake.start_size" type="int" value="3" _static=""/>
+		<item id="field.width" type="int" value="15" _static=""/>
+		<item id="field.height" type="int" value="15" _static=""/>
+		<item id="field.depth" type="int" value="15" _static=""/>
+		<item id="apple.count" type="int" value="2" _static=""/>
+		<item id="apple.delay" type="int" value="10" _static=""/>
+	</general>
+</data>

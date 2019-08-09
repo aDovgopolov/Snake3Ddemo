@@ -1,0 +1,103 @@
+﻿<data preset="">
+	<affect id="type" type="" values="*" goal="" action="" param="" value="">
+		<item id="upProduct01n" type="simple" values="" goal="business" action="multiplier" param="profit" value="product01n"/>
+		<item id="upProduct02n" type="simple" values="" goal="business" action="multiplier" param="profit" value="product02n"/>
+		<item id="upProduct03n" type="simple" values="" goal="business" action="multiplier" param="profit" value="product03n"/>
+		<item id="upProduct04n" type="simple" values="" goal="business" action="multiplier" param="profit" value="product04n"/>
+		<item id="upProduct05n" type="simple" values="" goal="business" action="multiplier" param="profit" value="product05n"/>
+		<item id="upProduct06n" type="simple" values="" goal="business" action="multiplier" param="profit" value="product06n"/>
+		<item id="upProduct07n" type="simple" values="" goal="business" action="multiplier" param="profit" value="product07n"/>
+		<item id="upProduct08n" type="simple" values="" goal="business" action="multiplier" param="profit" value="product08n"/>
+		<item id="upProduct09n" type="simple" values="" goal="business" action="multiplier" param="profit" value="product09n"/>
+		<item id="upProduct10n" type="simple" values="" goal="business" action="multiplier" param="profit" value="product10n"/>
+		<item id="upProduct04e" type="simple" values="" goal="business" action="multiplier" param="profit" value="product04e"/>
+		<item id="upProduct05e" type="simple" values="" goal="business" action="multiplier" param="profit" value="product05e"/>
+		<item id="upProduct06e" type="simple" values="" goal="business" action="multiplier" param="profit" value="product06e"/>
+		<item id="upProduct07e" type="simple" values="" goal="business" action="multiplier" param="profit" value="product07e"/>
+		<item id="upProduct08e" type="simple" values="" goal="business" action="multiplier" param="profit" value="product08e"/>
+		<item id="upProduct09e" type="simple" values="" goal="business" action="multiplier" param="profit" value="product09e"/>
+		<item id="upProduct10e" type="simple" values="" goal="business" action="multiplier" param="profit" value="product10e"/>
+		<item id="upProduct04g" type="simple" values="" goal="business" action="multiplier" param="profit" value="product04g"/>
+		<item id="upProduct05g" type="simple" values="" goal="business" action="multiplier" param="profit" value="product05g"/>
+		<item id="upProduct06g" type="simple" values="" goal="business" action="multiplier" param="profit" value="product06g"/>
+		<item id="upProduct07g" type="simple" values="" goal="business" action="multiplier" param="profit" value="product07g"/>
+		<item id="upProduct08g" type="simple" values="" goal="business" action="multiplier" param="profit" value="product08g"/>
+		<item id="upProduct09g" type="simple" values="" goal="business" action="multiplier" param="profit" value="product09g"/>
+		<item id="upProduct10g" type="simple" values="" goal="business" action="multiplier" param="profit" value="product10g"/>
+		<item id="upProduct11n1" type="simple" values="" goal="business" action="multiplier" param="profit" value="product11n"/>
+	</affect>
+	<business id="type" base_price="" pow="float" base_production="" time="float" locked="bool">
+		<item id="bakery" base_price="10" pow="1.15" base_production="2" time="1" locked="0"/>
+		<item id="clothing" base_price="125" pow="1.15" base_production="6" time="1" locked="0"/>
+		<item id="jewelery" base_price="600" pow="1.15" base_production="20" time="1" locked="0"/>
+		<item id="fastfood" base_price="1800" pow="1.15" base_production="65" time="1" locked="0"/>
+		<item id="music" base_price="5600" pow="1.15" base_production="200" time="1" locked="0"/>
+		<item id="arcade" base_price="38000" pow="1.15" base_production="650" time="1" locked="0"/>
+		<item id="groceries" base_price="442000" pow="1.15" base_production="2#3" time="1" locked="0"/>
+	</business>
+	<general _list="true">
+		<item id="first" type="int" value="1" comment="тест"/>
+		<item id="click.reward" type="int" value="1" comment="Базовая награда за клик"/>
+		<item id="click.delay" type="int" value="100" comment="Задержка между кликами"/>
+		<item id="test" type="string" value="asdd" comment=""/>
+		<item id="test2" type="*" value="gg,dd,dd,1223,44" comment=""/>
+	</general>
+	<upgrade id="type" product="" affects="*" cost="*" req_param="" req_trophy="" req_upgrade="" thread="" condition1="">
+		<item id="product01n.profit1" product="bakery" affects="upProduct01n:2" cost="200" req_param="" req_trophy="" req_upgrade="" thread="product01n.profit" condition1="gbuildProduct01n:5"/>
+		<item id="product01n.profit2" product="bakery" affects="upProduct01n:3" cost="6580" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct01n:25"/>
+		<item id="product01n.profit3" product="bakery" affects="upProduct01n:4" cost="10.7#6" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct01n:100"/>
+		<item id="product01n.profit4" product="bakery" affects="upProduct01n:5" cost="5.09#11" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct01n:150"/>
+		<item id="product01n.profit5" product="bakery" affects="upProduct01n:6" cost="6.895#14" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct01n:200"/>
+		<item id="product01n.profit6" product="bakery" affects="upProduct01n:5" cost="9.716#20" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct01n:300"/>
+		<item id="product01n.profit7" product="bakery" affects="upProduct01n:4" cost="1.331#27" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct01n:400"/>
+		<item id="product01n.profit8" product="bakery" affects="upProduct01n:3" cost="1.786#33" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct01n:500"/>
+		<item id="product02n.profit1" product="clothing" affects="upProduct02n:2" cost="2510" req_param="" req_trophy="" req_upgrade="" thread="product02n.profit" condition1="gbuildProduct02n:5"/>
+		<item id="product02n.profit2" product="clothing" affects="upProduct02n:3" cost="82300" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct02n:25"/>
+		<item id="product02n.profit3" product="clothing" affects="upProduct02n:4" cost="1.338#8" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct02n:75"/>
+		<item id="product02n.profit4" product="clothing" affects="upProduct02n:5" cost="6.363#12" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct02n:150"/>
+		<item id="product02n.profit5" product="clothing" affects="upProduct02n:6" cost="8.619#15" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct02n:200"/>
+		<item id="product02n.profit6" product="clothing" affects="upProduct02n:5" cost="1.215#22" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct02n:300"/>
+		<item id="product02n.profit7" product="clothing" affects="upProduct02n:4" cost="1.663#28" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct02n:400"/>
+		<item id="product02n.profit8" product="clothing" affects="upProduct02n:3" cost="2.233#34" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct02n:500"/>
+		<item id="product03n.profit1" product="jewelery" affects="upProduct03n:2" cost="12070" req_param="" req_trophy="" req_upgrade="" thread="product03n.profit" condition1="gbuildProduct03n:5"/>
+		<item id="product03n.profit2" product="jewelery" affects="upProduct03n:3" cost="395020" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct03n:25"/>
+		<item id="product03n.profit3" product="jewelery" affects="upProduct03n:4" cost="6.421#8" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct03n:75"/>
+		<item id="product03n.profit4" product="jewelery" affects="upProduct03n:5" cost="3.054#13" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct03n:150"/>
+		<item id="product03n.profit5" product="jewelery" affects="upProduct03n:6" cost="4.137#16" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct03n:200"/>
+		<item id="product03n.profit6" product="jewelery" affects="upProduct03n:5" cost="5.829#22" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct03n:300"/>
+		<item id="product03n.profit7" product="jewelery" affects="upProduct03n:4" cost="7.987#28" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct03n:400"/>
+		<item id="product03n.profit8" product="jewelery" affects="upProduct03n:3" cost="1.071#35" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct03n:500"/>
+		<item id="product04n.profit1" product="fastfood" affects="upProduct04n:2" cost="36200" req_param="" req_trophy="" req_upgrade="alignment.neutral" thread="product04n.profit" condition1="gbuildProduct04n:5"/>
+		<item id="product04n.profit2" product="fastfood" affects="upProduct04n:2" cost="1.185#6" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct04n:25"/>
+		<item id="product04n.profit3" product="fastfood" affects="upProduct04n:2" cost="1.926#9" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct04n:75"/>
+		<item id="product04n.profit4" product="fastfood" affects="upProduct04n:2" cost="9.162#13" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct04n:150"/>
+		<item id="product04n.profit5" product="fastfood" affects="upProduct04n:2" cost="1.241#17" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct04n:200"/>
+		<item id="product04n.profit6" product="fastfood" affects="upProduct04n:3" cost="1.749#23" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct04n:300"/>
+		<item id="product04n.profit7" product="fastfood" affects="upProduct04n:3" cost="2.396#29" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct04n:400"/>
+		<item id="product04n.profit8" product="fastfood" affects="upProduct04n:3" cost="3.216#35" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct04n:500"/>
+		<item id="product05n.profit1" product="music" affects="upProduct05n:2" cost="112640" req_param="" req_trophy="" req_upgrade="alignment.neutral" thread="product05n.profit" condition1="gbuildProduct05n:5"/>
+		<item id="product05n.profit2" product="music" affects="upProduct05n:2" cost="3.687#6" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct05n:25"/>
+		<item id="product05n.profit3" product="music" affects="upProduct05n:2" cost="5.993#9" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct05n:75"/>
+		<item id="product05n.profit4" product="music" affects="upProduct05n:2" cost="2.851#14" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct05n:150"/>
+		<item id="product05n.profit5" product="music" affects="upProduct05n:2" cost="3.861#17" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct05n:200"/>
+		<item id="product05n.profit6" product="music" affects="upProduct05n:3" cost="5.441#23" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct05n:300"/>
+		<item id="product05n.profit7" product="music" affects="upProduct05n:3" cost="7.455#29" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct05n:400"/>
+		<item id="product05n.profit8" product="music" affects="upProduct05n:3" cost="1#36" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct05n:500"/>
+		<item id="product06n.profit1" product="arcade" affects="upProduct06n:2" cost="764320" req_param="" req_trophy="" req_upgrade="alignment.neutral" thread="product06n.profit" condition1="gbuildProduct06n:5"/>
+		<item id="product06n.profit2" product="arcade" affects="upProduct06n:2" cost="2.502#7" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct06n:25"/>
+		<item id="product06n.profit3" product="arcade" affects="upProduct06n:2" cost="4.067#10" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct06n:75"/>
+		<item id="product06n.profit4" product="arcade" affects="upProduct06n:2" cost="1.934#15" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct06n:150"/>
+		<item id="product06n.profit5" product="arcade" affects="upProduct06n:2" cost="2.62#18" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct06n:200"/>
+		<item id="product06n.profit6" product="arcade" affects="upProduct06n:3" cost="3.692#24" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct06n:300"/>
+		<item id="product06n.profit7" product="arcade" affects="upProduct06n:3" cost="5.058#30" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct06n:400"/>
+		<item id="product06n.profit8" product="arcade" affects="upProduct06n:3" cost="6.789#36" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct06n:500"/>
+		<item id="product07n.profit1" product="groceries" affects="upProduct07n:2" cost="8.89#6" req_param="" req_trophy="" req_upgrade="alignment.neutral" thread="product07n.profit" condition1="gbuildProduct07n:5"/>
+		<item id="product07n.profit2" product="groceries" affects="upProduct07n:2" cost="2.91#8" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct07n:25"/>
+		<item id="product07n.profit3" product="groceries" affects="upProduct07n:2" cost="4.73#11" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct07n:75"/>
+		<item id="product07n.profit4" product="groceries" affects="upProduct07n:2" cost="2.25#16" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct07n:150"/>
+		<item id="product07n.profit5" product="groceries" affects="upProduct07n:2" cost="3.048#19" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct07n:200"/>
+		<item id="product07n.profit6" product="groceries" affects="upProduct07n:3" cost="4.295#25" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct07n:300"/>
+		<item id="product07n.profit7" product="groceries" affects="upProduct07n:3" cost="5.884#31" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct07n:400"/>
+		<item id="product07n.profit8" product="groceries" affects="upProduct07n:3" cost="7.896#37" req_param="" req_trophy="" req_upgrade="prev" thread="" condition1="gbuildProduct07n:500"/>
+	</upgrade>
+</data>
