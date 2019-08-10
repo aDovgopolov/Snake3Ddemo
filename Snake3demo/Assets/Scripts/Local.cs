@@ -1,9 +1,9 @@
-
 using System;
 using System.Collections.Generic;
-//using System.Collections.Specialized;
+using System.Collections.Specialized;
 using System.Xml;
 using UnityEngine;
+
 //TODO: use dictinary instead of list
 public static class local
 {

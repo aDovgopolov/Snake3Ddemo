@@ -7,34 +7,37 @@ using DG.Tweening;
 public class Snake : MonoBehaviour
 {    
     private float lastMove = 1f;
-    private int x = 0;
-    private int y = 0;
-    private int z = 0;
+    private int _x = 5;
+    private int _y = 5;
+    private int _z = 8;
     private Vector3 oldPosition;
     private Vector3 newPos;
+    private bool _appleFound = false;
+    private Vector3 _applePosotion;
+    private Vector3 directionToApple;
     
-    private Vector3[] directions = new Vector3[]
-          {
+    private Vector3[] directions = {
               new Vector3(0, -1, 0), 
               new Vector3(0, 1, 0), 
               new Vector3(-1, 0, 0), 
               new Vector3(1, 0, 0), 
-              new Vector3(0, 0, 1)
+              new Vector3(0, 0, 1), 
+              new Vector3(0, 0, -1)
           };
 
     private void Awake()
     {
         Random random = new Random();
-        x = random.Next(0, 15);
-        y = random.Next(0, 15);
-        z = random.Next(0, 15);
+        /*_x = random.Next(0, 15);
+        _y = random.Next(0, 15);
+        _z = random.Next(0, 15);*/
     }
 
     private void Start()
     {
         //local.init("local");
         loader loader = gameObject.AddComponent<loader>();
-        GetComponent<Transform>().position = new Vector3(x, y, z);
+        GetComponent<Transform>().position = new Vector3(_x, _y, _z);
         
         // TODO can be out of range on Start
         Grid.UpdateGrid3D(this);
@@ -42,98 +45,129 @@ public class Snake : MonoBehaviour
 
     void Update()
     {
-        if (Time.time - lastMove >= 1f)
+        if (Time.time - lastMove >= 1f )
         {
             Movement();
+            /*if (!_appleFound)
+                
+            else
+                MovementToApple();*/
         }
+    }
+
+    public void MovementToApple()
+    {
+        Debug.Log("MovementToApple");
+        
+        SetGridInfo();
+        // neto
+        Vector3 direction = _applePosotion;
+        
+        Vector3 oldPosition  = transform.GetChild(0).transform.position;
+        
+        
+        Vector3 pos = transform.GetChild(0).transform.position += direction;
+        move(transform.GetChild(0).transform , pos);
+        
+        LookForward(transform.GetChild(0).transform.position, direction);
+        
+        for (int i = 1; i < transform.GetChildCount(); i++)
+        {
+            move(transform.GetChild(i).transform, oldPosition);
+            oldPosition = transform.GetChild(i).transform.position;
+        }
+        
+        lastMove = Time.time;
     }
     
     public void Movement()
     {
         SetGridInfo();
         
-        Vector3 direction = CheckFreeSpaceExeptItself();
+        
+        Vector3 direction = _appleFound ? GetMoveDirectionToApple() :  CheckFreeSpaceExeptItself();
         
         Vector3 oldPosition  = transform.GetChild(0).transform.position;
+        
         
         Vector3 pos = transform.GetChild(0).transform.position += direction;
         move(transform.GetChild(0).transform , pos);
         
+        LookForward(transform.GetChild(0).transform.position, direction);
+        
         for (int i = 1; i < transform.GetChildCount(); i++)
         {
-           // Vector3 childOldPos  = transform.GetChild(i).transform.position;
             move(transform.GetChild(i).transform, oldPosition);
             oldPosition = transform.GetChild(i).transform.position;
-           // oldPosition = childOldPos;
         }
         
         lastMove = Time.time;
     }
 
+    private void LookForward(Vector3 headPosition, Vector3 direction)
+    {   
+        int layerMask = 1 << 9;
+
+        
+        RaycastHit hit;
+        Vector3 directionLine = headPosition + (direction * 15);
+        
+        if (Physics.Raycast(headPosition, direction, out hit, Mathf.Infinity, layerMask))
+        {
+            Debug.DrawRay(headPosition, direction , Color.yellow, 1f);
+            Debug.DrawLine(headPosition, directionLine, Color.red, 1f);
+            Debug.Log($"Did Hit {hit} and {hit.transform.position} and {hit.transform.gameObject.name}");
+            _appleFound = true;
+            _applePosotion = hit.transform.position;
+            Debug.Break();
+        }
+        else
+        {
+            Debug.DrawLine(headPosition, direction, Color.white, 1f);
+            Debug.Log("Did not Hit");
+        }
+    }
+    
     private void move(Transform transform, Vector3 pos)
     {
         Sequence mySequence = DOTween.Sequence();
         transform.DOScale(new Vector3(0.5f, 0.5f, 1), 0.5f).OnComplete(() => OnScaleRevert(transform));
         mySequence.Append(transform.DOMove(pos, 1));
     }
-    
-    public void Movementv1()
-    {
-        SetGridInfo();
-        
-        Vector3 direction = CheckFreeSpaceExeptItself();
-        
-        Vector3 oldPosition  = transform.GetChild(0).transform.position;
-        
-        Vector3 pos = transform.GetChild(0).transform.position + direction;
-        Move(transform.GetChild(0).transform , pos);
-        
-        for (int i = 1; i < transform.GetChildCount(); i++)
-        {
-            Vector3 childOldPos = transform.GetChild(i).transform.position;
-            Move(transform.GetChild(i).transform, oldPosition);
-            oldPosition = childOldPos;
-        }
-        
-        lastMove = Time.time;
-    }
-    
-    public void MovementV2()
-    {
-        SetGridInfo();
-        
-        Vector3 direction = CheckFreeSpaceExeptItself();
-        
-        //oldPosition  = transform.GetChild(0).transform.position;
-            
-        
-        for (int i = 0; i < transform.GetChildCount(); i++)
-        {
-            newPos = transform.GetChild(i).transform.position + direction;
-            Move(transform.GetChild(i).transform, newPos);
-        }
-        
-        lastMove = Time.time;
-    }
-    
-    private void Move(Transform transform, Vector3 pos)
-    {
-        Sequence mySequence = DOTween.Sequence();
-        
-        Vector3 childOldPos = transform.position;
-        transform.DOScale(new Vector3(0.5f, 0.5f, 1), 0.5f).SetDelay(0.25f).OnComplete(() => OnScaleRevert(transform));
-        mySequence.Append(transform.DOMove(pos, lastMove).SetDelay(0.25f));
-        //transform.DOMove(pos, lastMove);
-        
-        newPos = childOldPos;
-    }
-
+   
     private void OnScaleRevert(Transform transform)
     {
         transform.DOScale(new Vector3(1f, 1f, 1), 0.5f);
     }
+
+    private Vector3 GetMoveDirectionToApple()
+    {
+        Debug.Log("GetMoveDirectionToApple");
+        
+        Vector3 value = _applePosotion - gameObject.transform.GetChild(0).position;
+        
+        Debug.Log("value = " + value);
+        
+        if (value.x != 0.0f)
+        {
+            directionToApple = new Vector3(Math.Abs(value.x / value.x), value.y, value.z);
+        }
+        else if (value.y != 0.0f)
+        {
+            directionToApple = new Vector3(value.x , Math.Abs(value.y / value.y), value.z);
+        }
+        else if(value.z != 0.0f)
+        {
+            directionToApple = new Vector3(value.x, value.y, Math.Abs(value.z / value.z));
+            
+        }
+        Debug.Log("direction = " +  directionToApple);
+        Debug.Break();
+        
+        return directionToApple;
+    }
     
-    public Vector3 CheckFreeSpaceExeptItself()
+    private Vector3 CheckFreeSpaceExeptItself()
     {
         Vector3 direction = gameObject.transform.GetChild(0).position;
         
@@ -159,7 +193,6 @@ public class Snake : MonoBehaviour
         
         return randomDirectionToMove;
     }
-
     
     public void SetGridInfo()
     {

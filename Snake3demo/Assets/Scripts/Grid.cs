@@ -58,9 +58,7 @@ public class Grid : MonoBehaviour
     
     public static bool GetTransformOnPoint(Vector3 vec)
     {
-        //Debug.Log($"x = {(int)vec.x} - y = {(int)vec.y} - z = {(int)vec.z}");
-        
-        // out of range
+        // out of range fix version 1
         bool xOutOfRange = (int) vec.x >= 15 || (int) vec.x < 0;
         bool yOutOfRange = (int) vec.y >= 15 || (int) vec.y < 0;
         bool zOutOfRange = (int) vec.z >= 15 || (int) vec.z < 0;
@@ -71,7 +69,7 @@ public class Grid : MonoBehaviour
         }
         
         Transform transform = grid3D[(int)vec.x, (int)vec.y, (int)vec.z];
-        Debug.Log($"transform = {transform}");
+        //Debug.Log($"transform = {transform}");
         bool isSomething = transform != null;
         return isSomething;
     }

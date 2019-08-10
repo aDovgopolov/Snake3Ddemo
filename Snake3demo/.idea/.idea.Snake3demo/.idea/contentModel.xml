@@ -33,6 +33,7 @@
           <e p="Local.cs" t="Include" />
           <e p="OtherTests" t="Include">
             <e p="Hero.cs" t="Include" />
+            <e p="testRay.cs" t="Include" />
           </e>
           <e p="Snake.cs" t="Include" />
           <e p="SnakePosition.cs" t="Include" />
