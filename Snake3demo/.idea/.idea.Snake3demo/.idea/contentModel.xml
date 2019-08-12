@@ -28,14 +28,12 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="Apple.cs" t="Include" />
+          <e p="ConfigReader.cs" t="Include" />
           <e p="Grid.cs" t="Include" />
           <e p="loader.cs" t="Include" />
           <e p="Local.cs" t="Include" />
-          <e p="OtherTests" t="Include">
-            <e p="Hero.cs" t="Include" />
-            <e p="testRay.cs" t="Include" />
-          </e>
           <e p="Snake.cs" t="Include" />
+          <e p="SnakeLogic.cs" t="Include" />
           <e p="SnakePosition.cs" t="Include" />
           <e p="SnakeTrigger.cs" t="Include" />
         </e>

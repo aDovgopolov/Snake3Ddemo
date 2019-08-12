@@ -7,54 +7,110 @@ using UnityEngine.Serialization;
 
 public class Snake : MonoBehaviour
 {    
-    private float lastMove = 1f;
+    private SnakeLogic snakeLogic;
+    
+    public static float _lastMove = 1f;
     private int _x = 5;
     private int _y = 5;
     private int _z = 8;
     private Vector3 oldPosition;
-    private Vector3 newPos;
-    private bool _appleFound = false;
-    private Vector3 _applePosotion;
-    private Vector3 directionToApple;
+    
     [FormerlySerializedAs("_snakePart")] [SerializeField] 
     private GameObject snakePart;
     
-    private Vector3[] directions = {
-              new Vector3(0, -1, 0), 
-              new Vector3(0, 1, 0), 
-              new Vector3(-1, 0, 0), 
-              new Vector3(1, 0, 0), 
-              new Vector3(0, 0, 1), 
-              new Vector3(0, 0, -1)
-          };
-
-    private void Awake()
-    {
-        Random random = new Random();
-        /*_x = random.Next(0, 15);
-        _y = random.Next(0, 15);
-        _z = random.Next(0, 15);*/
-    }
-
     private void Start()
-    {
-        //local.init("local");
-        loader loader = gameObject.AddComponent<loader>();
+    {    
+        local.init("local");
+        snakeLogic = new SnakeLogic(local.general.snake.count);
+        snakeLogic.RegisterHandler(ChangePos, SnakeGrow);
+            
         GetComponent<Transform>().position = new Vector3(_x, _y, _z);
         
         // TODO can be out of range on Start
+        for (int i = 0; i < local.general.snake.count; i++)
+        {
+            snakeLogic.SnakeBody.Add(transform.GetChild(i));
+        }
+        
         Grid.UpdateGrid3D(this);
     }
 
     void Update()
     {
-        if (Time.time - lastMove >= 1f )
+        if (Time.time - _lastMove >= 1f )
+        {    
+            SetGridInfo();
+            snakeLogic.Move();
+        }
+    }
+    
+   
+    public void ChangePos(Transform transform, Vector3 pos)
+    {
+        Debug.Log("ChangePos");
+        Sequence mySequence = DOTween.Sequence();
+        transform.DOScale(new Vector3(0.5f, 0.5f, 1), 0.5f).OnComplete(() => OnScaleRevert(transform));
+        mySequence.Append(transform.DOMove(pos, 1));
+    }
+    
+    private void OnScaleRevert(Transform transform)
+    {
+        transform.DOScale(new Vector3(1f, 1f, 1), 0.5f);
+    }
+    
+    private void SnakeGrow()
+    {
+        int index = transform.GetChildCount();
+        Vector3 newSnakePartPos = transform.GetChild(index  - 1).transform.position;
+        GameObject _snakePart = Instantiate(snakePart, newSnakePartPos, Quaternion.identity) as GameObject;
+        _snakePart.transform.parent = transform;
+        snakeLogic.SnakeBody.Add(_snakePart.transform);
+    }
+    
+    public void SetGridInfo()
+    {
+        if (Grid.IsValidGridPos3D(this))
         {
-            Movement();
+            Grid.UpdateGrid3D(this);
         }
     }
 
-    public void MovementToApple()
+
+    public void CheckConnectionWithHead()
+    {
+        snakeLogic.CheckConnectionWithHead();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    #region OldType 
+    
+    
+    public void ChangePos(float oldX, float oldY, float oldZ, 
+        float newX, float newY, float newZ)
+    {
+        Debug.Log("ChangePos");
+        
+    }
+
+    
+    
+    private void move(Transform transform, Vector3 pos)
+    {
+        Sequence mySequence = DOTween.Sequence();
+        transform.DOScale(new Vector3(0.5f, 0.5f, 1), 0.5f).OnComplete(() => OnScaleRevert(transform));
+        mySequence.Append(transform.DOMove(pos, 1));
+    }
+    
+    /*public void MovementToApple()
     {
         Debug.Log("MovementToApple");
         
@@ -76,10 +132,33 @@ public class Snake : MonoBehaviour
             oldPosition = transform.GetChild(i).transform.position;
         }
         
-        lastMove = Time.time;
-    }
+        _lastMove = Time.time;
+    }*/
     
-    public void Movement()
+    /*private void LookForward(Vector3 headPosition, Vector3 direction)
+    {   
+        int layerMask = 1 << 9;
+
+        RaycastHit hit;
+        Vector3 directionLine = headPosition + (direction * 15);
+        
+        if (Physics.Raycast(headPosition, direction, out hit, Mathf.Infinity, layerMask))
+        {
+            Debug.DrawRay(headPosition, direction , Color.yellow, 1f);
+            Debug.DrawLine(headPosition, directionLine, Color.red, 1f);
+            Debug.Log($"Did Hit {hit} and {hit.transform.position} and {hit.transform.gameObject.name}");
+            _appleFound = true;
+            _applePosotion = hit.transform.position;
+            //Debug.Break();
+        }
+        else
+        {
+            Debug.DrawLine(headPosition, direction, Color.white, 1f);
+            Debug.Log("Did not Hit");
+        }
+    }*/
+    
+    /*public void Movement()
     {
         SetGridInfo();
         
@@ -102,43 +181,7 @@ public class Snake : MonoBehaviour
         
         lastMove = Time.time;
     }
-
-    private void LookForward(Vector3 headPosition, Vector3 direction)
-    {   
-        int layerMask = 1 << 9;
-
-        
-        RaycastHit hit;
-        Vector3 directionLine = headPosition + (direction * 15);
-        
-        if (Physics.Raycast(headPosition, direction, out hit, Mathf.Infinity, layerMask))
-        {
-            Debug.DrawRay(headPosition, direction , Color.yellow, 1f);
-            Debug.DrawLine(headPosition, directionLine, Color.red, 1f);
-            Debug.Log($"Did Hit {hit} and {hit.transform.position} and {hit.transform.gameObject.name}");
-            _appleFound = true;
-            _applePosotion = hit.transform.position;
-            //Debug.Break();
-        }
-        else
-        {
-            Debug.DrawLine(headPosition, direction, Color.white, 1f);
-            Debug.Log("Did not Hit");
-        }
-    }
     
-    private void move(Transform transform, Vector3 pos)
-    {
-        Sequence mySequence = DOTween.Sequence();
-        transform.DOScale(new Vector3(0.5f, 0.5f, 1), 0.5f).OnComplete(() => OnScaleRevert(transform));
-        mySequence.Append(transform.DOMove(pos, 1));
-    }
-   
-    private void OnScaleRevert(Transform transform)
-    {
-        transform.DOScale(new Vector3(1f, 1f, 1), 0.5f);
-    }
-
     private Vector3 GetMoveDirectionToApple()
     {
         Debug.Log("GetMoveDirectionToApple");
@@ -203,31 +246,7 @@ public class Snake : MonoBehaviour
         }
         
         return randomDirectionToMove;
-    }
-    
-    public void SetGridInfo()
-    {
-        if (Grid.IsValidGridPos3D(this))
-        {
-            Grid.UpdateGrid3D(this);
-        }
-    }
+    }*/
 
-
-    public void CheckConnectionWithHead()
-    {
-        SnakeGrow();
-        _appleFound = false;
-        Debug.Log("Success");
-    }
-
-    
-    private void SnakeGrow()
-    {
-       // GameObject _snakePart2 = this.snakePart;
-       int index = transform.GetChildCount();
-       Vector3 newSnakePartPos = transform.GetChild(index  - 1).transform.position;
-        GameObject _snakePart = Instantiate(snakePart, newSnakePartPos, Quaternion.identity) as GameObject;
-        _snakePart.transform.parent = transform;
-    }
+    #endregion
 }

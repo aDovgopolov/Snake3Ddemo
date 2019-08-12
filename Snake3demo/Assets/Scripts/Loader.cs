@@ -6,7 +6,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
 
-public class loader : MonoBehaviour
+public class Loader : MonoBehaviour
 {
     public SnakePosition snakePosition;
 

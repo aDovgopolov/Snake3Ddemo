@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid : MonoBehaviour
+public class Grid
 {
     public static int x = 15;
     public static int y = 15;
@@ -69,7 +69,6 @@ public class Grid : MonoBehaviour
         }
         
         Transform transform = grid3D[(int)vec.x, (int)vec.y, (int)vec.z];
-        //Debug.Log($"transform = {transform}");
         bool isSomething = transform != null;
         return isSomething;
     }
