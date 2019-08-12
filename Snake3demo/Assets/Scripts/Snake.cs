@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Random = System.Random;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 public class Snake : MonoBehaviour
 {    
@@ -15,6 +16,8 @@ public class Snake : MonoBehaviour
     private bool _appleFound = false;
     private Vector3 _applePosotion;
     private Vector3 directionToApple;
+    [FormerlySerializedAs("_snakePart")] [SerializeField] 
+    private GameObject snakePart;
     
     private Vector3[] directions = {
               new Vector3(0, -1, 0), 
@@ -48,10 +51,6 @@ public class Snake : MonoBehaviour
         if (Time.time - lastMove >= 1f )
         {
             Movement();
-            /*if (!_appleFound)
-                
-            else
-                MovementToApple();*/
         }
     }
 
@@ -119,7 +118,7 @@ public class Snake : MonoBehaviour
             Debug.Log($"Did Hit {hit} and {hit.transform.position} and {hit.transform.gameObject.name}");
             _appleFound = true;
             _applePosotion = hit.transform.position;
-            Debug.Break();
+            //Debug.Break();
         }
         else
         {
@@ -145,24 +144,36 @@ public class Snake : MonoBehaviour
         Debug.Log("GetMoveDirectionToApple");
         
         Vector3 value = _applePosotion - gameObject.transform.GetChild(0).position;
-        
-        Debug.Log("value = " + value);
+        int tmp;
+//        Debug.Log("value = " + value);
         
         if (value.x != 0.0f)
         {
-            directionToApple = new Vector3(Math.Abs(value.x / value.x), value.y, value.z);
+            tmp = (int)Mathf.Abs(value.x / value.x);
+            if (value.x < 0)
+                tmp = tmp * (-1);
+            Debug.Log(tmp);
+            directionToApple = new Vector3(tmp, value.y, value.z);
         }
         else if (value.y != 0.0f)
         {
-            directionToApple = new Vector3(value.x , Math.Abs(value.y / value.y), value.z);
+            tmp = (int)Mathf.Abs(value.y / value.y);
+            if (value.y < 0)
+                tmp = tmp * (-1);
+            Debug.Log(tmp);
+            directionToApple = new Vector3(value.x , tmp, value.z);
         }
         else if(value.z != 0.0f)
         {
-            directionToApple = new Vector3(value.x, value.y, Math.Abs(value.z / value.z));
+            tmp = (int)Mathf.Abs(value.z / value.z);
+            if (value.z < 0)
+                tmp = tmp * (-1);
+            Debug.Log(tmp);
+            directionToApple = new Vector3(value.x, value.y, tmp);
             
         }
-        Debug.Log("direction = " +  directionToApple);
-        Debug.Break();
+//        Debug.Log("direction = " +  directionToApple);
+        //Debug.Break();
         
         return directionToApple;
     }
@@ -201,5 +212,22 @@ public class Snake : MonoBehaviour
             Grid.UpdateGrid3D(this);
         }
     }
+
+
+    public void CheckConnectionWithHead()
+    {
+        SnakeGrow();
+        _appleFound = false;
+        Debug.Log("Success");
+    }
+
     
+    private void SnakeGrow()
+    {
+       // GameObject _snakePart2 = this.snakePart;
+       int index = transform.GetChildCount();
+       Vector3 newSnakePartPos = transform.GetChild(index  - 1).transform.position;
+        GameObject _snakePart = Instantiate(snakePart, newSnakePartPos, Quaternion.identity) as GameObject;
+        _snakePart.transform.parent = transform;
+    }
 }

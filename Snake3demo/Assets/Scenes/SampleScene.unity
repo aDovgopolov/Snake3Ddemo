@@ -542,6 +542,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &98956261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98956255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce760336a4b51547aa6457e64c93da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &105207226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8924,7 +8936,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &1610567064
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9738,6 +9750,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1827985244}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1828485366 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6903161120541136829, guid: c48214df24b31854b9b6a1a35b012be9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6903161120752785629}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1828485367
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828485366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1871607729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11474,6 +11505,12 @@ PrefabInstance:
       propertyPath: tail.Array.data[2]
       value: 
       objectReference: {fileID: 1901474686}
+    - target: {fileID: 6903161120541136828, guid: c48214df24b31854b9b6a1a35b012be9,
+        type: 3}
+      propertyPath: _snakePart
+      value: 
+      objectReference: {fileID: 702992288161587754, guid: 38aa58553445d504c82be793ed299079,
+        type: 3}
     - target: {fileID: 6903161120658565951, guid: c48214df24b31854b9b6a1a35b012be9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -11523,6 +11560,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903161120658565948, guid: c48214df24b31854b9b6a1a35b012be9,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c48214df24b31854b9b6a1a35b012be9, type: 3}
