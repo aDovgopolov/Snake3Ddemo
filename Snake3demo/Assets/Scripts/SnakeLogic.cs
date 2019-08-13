@@ -13,26 +13,28 @@ public class SnakeLogic
     private Vector3 _directionToApple;
     private Vector3 _headPosition;
     private Vector3 _oldPosition;
-    
+
     private float _x = 0f;
     private float _y = 0f;
     private float _z = 0f;
-    
-    private Vector3[] directions = {
-        new Vector3(0, -1, 0), 
-        new Vector3(0, 1, 0), 
-        new Vector3(-1, 0, 0), 
-        new Vector3(1, 0, 0), 
-        new Vector3(0, 0, 1), 
+
+    private Vector3[] directions =
+    {
+        new Vector3(0, -1, 0),
+        new Vector3(0, 1, 0),
+        new Vector3(-1, 0, 0),
+        new Vector3(1, 0, 0),
+        new Vector3(0, 0, 1),
         new Vector3(0, 0, -1)
     };
-    
+
     public List<Transform> SnakeBody = new List<Transform>();
-    
+
     public delegate void OnPosChanged(Transform transform, Vector3 pos);
+
     public delegate void OnAppleEated();
-    
-    public event OnPosChanged Del; 
+
+    public event OnPosChanged Del = delegate { }; 
     public event OnAppleEated Add;
     #endregion
 
@@ -56,23 +58,21 @@ public class SnakeLogic
         // SetGridInfo();
         Vector3 direction = _appleFound ? GetMoveDirectionToApple() :  CheckFreeSpaceExeptItself();
         
-        _oldPosition = _headPosition; 
-        
         Debug.Log("_headPosition = "  + _headPosition  + $" - {direction}");
         Vector3 newPOs = _headPosition += direction;
         
+        _oldPosition = _headPosition; 
+        
         Debug.Log("_headPosition = "  + _headPosition  + $" - {direction} + {newPOs}" );
-        Debug.Break();
         
-        Del?.Invoke(SnakeBody[0] , newPOs);
+        Del(SnakeBody[0] , newPOs);
         //_headPosition = newPOs;
-        
         LookForward(_headPosition, direction);
         
         for (int i = 1; i < SnakeBody.Count; i++)
         {
+            _oldPosition = SnakeBody[i - 1].position;
             Del?.Invoke(SnakeBody[i] , _oldPosition);
-            _oldPosition = SnakeBody[i].position;
         }
         
         Snake._lastMove = Time.time;
