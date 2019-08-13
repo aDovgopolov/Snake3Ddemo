@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="18ade6be-710a-427b-9c80-9303234fd53b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -124,7 +122,7 @@
       <workItem from="1565590913719" duration="20535000" />
       <workItem from="1565623867530" duration="299000" />
       <workItem from="1565677935728" duration="441000" />
-      <workItem from="1565678436080" duration="132000" />
+      <workItem from="1565678436080" duration="569000" />
     </task>
     <servers />
   </component>

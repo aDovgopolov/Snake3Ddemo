@@ -17,6 +17,7 @@ public class SnakePosition
     public override string ToString()
     {
         Debug.Log("toString'");
+        Debug.Log("second Commit'");
         return $"  x = {this.x}, y = {y}, z = {z}";
     }
 }
