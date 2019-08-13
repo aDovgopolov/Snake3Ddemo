@@ -16,6 +16,7 @@ public class SnakePosition
 
     public override string ToString()
     {
+        Debug.Log("toString'");
         return $"  x = {this.x}, y = {y}, z = {z}";
     }
 }
