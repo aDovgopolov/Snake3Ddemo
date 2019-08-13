@@ -4,26 +4,21 @@
     <list default="true" id="18ade6be-710a-427b-9c80-9303234fd53b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Apple.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Apple.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ConfigReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ConfigReader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Grid.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Snake.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Snake.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakeTrigger.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakeTrigger.cs.meta" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>direction</find>
-      <find>parent</find>
-      <find>move</find>
-      <find>_lastMove</find>
-      <find>newPos</find>
-      <find>_x</find>
-      <find>CheckConnectionWithHead</find>
-      <find>oldPosition</find>
-      <find>SetGridInfo</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -37,7 +32,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Grid.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Apple.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SnakeTrigger.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -47,14 +41,14 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/loader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Local.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/OtherTests/testRay.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Apple.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Loader.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ConfigReader.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SnakeTrigger.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ConfigReader.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Apple.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Snake.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" />
       </list>
     </option>
   </component>
@@ -99,10 +93,10 @@
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="1488">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="1488" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -124,7 +118,7 @@
       <workItem from="1565590913719" duration="20535000" />
       <workItem from="1565623867530" duration="299000" />
       <workItem from="1565677935728" duration="441000" />
-      <workItem from="1565678436080" duration="132000" />
+      <workItem from="1565678436080" duration="23613000" />
     </task>
     <servers />
   </component>
@@ -147,6 +141,44 @@
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
   </component>
+  <component name="WindowStateProjectService">
+    <state width="2517" height="376" key="GridCell.Tab.0.bottom" />
+    <state width="2517" height="376" key="GridCell.Tab.0.bottom/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.0.center" />
+    <state width="2517" height="376" key="GridCell.Tab.0.center/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.0.left" />
+    <state width="2517" height="376" key="GridCell.Tab.0.left/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.0.right" />
+    <state width="2517" height="376" key="GridCell.Tab.0.right/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.1.bottom" />
+    <state width="2517" height="376" key="GridCell.Tab.1.bottom/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.1.center" />
+    <state width="2517" height="376" key="GridCell.Tab.1.center/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.1.left" />
+    <state width="2517" height="376" key="GridCell.Tab.1.left/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.1.right" />
+    <state width="2517" height="376" key="GridCell.Tab.1.right/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.2.bottom" />
+    <state width="2517" height="376" key="GridCell.Tab.2.bottom/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.2.center" />
+    <state width="2517" height="376" key="GridCell.Tab.2.center/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.2.left" />
+    <state width="2517" height="376" key="GridCell.Tab.2.left/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.2.right" />
+    <state width="2517" height="376" key="GridCell.Tab.2.right/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.3.bottom" />
+    <state width="2517" height="376" key="GridCell.Tab.3.bottom/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.3.center" />
+    <state width="2517" height="376" key="GridCell.Tab.3.center/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.3.left" />
+    <state width="2517" height="376" key="GridCell.Tab.3.left/3840.2160" />
+    <state width="2517" height="376" key="GridCell.Tab.3.right" />
+    <state width="2517" height="376" key="GridCell.Tab.3.right/3840.2160" />
+    <state x="992" y="391" key="RiderGenerateDialog" />
+    <state x="992" y="391" key="RiderGenerateDialog/3840.2160" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/3840.2160" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -154,6 +186,19 @@
           <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs</url>
+          <line>99</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs" initialLine="97">
+            <startOffsets>
+              <option value="2575" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2592" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
