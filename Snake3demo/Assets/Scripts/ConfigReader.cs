@@ -17,7 +17,6 @@ public class ConfigReader : MonoBehaviour
     private int _fieldZSize = 0;
     private int _appleCount = 0;
     private float _appleDelay = 0f;
-
     
     #endregion
         
@@ -36,8 +35,4 @@ public class ConfigReader : MonoBehaviour
         _appleDelay = local.general.apple.delay;
     }
 
-    private void Start()
-    {
-        
-    }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
@@ -7,17 +8,17 @@ public class SnakeLogic
 {
     #region Values
 
-    private int _snakeSize;
+    private static int _snakeSize;
+    private Snake _snake;
     private bool _appleFound;
     private Vector3 _applePosition;
     private Vector3 _directionToApple;
-    private Vector3 _headPosition;
     private Vector3 _oldPosition;
-
-    private float _x = 0f;
-    private float _y = 0f;
-    private float _z = 0f;
-
+    
+    private int _xHead = 5;
+    private int _yHead = 5;
+    private int _zHead = 8;
+    
     private Vector3[] directions =
     {
         new Vector3(0, -1, 0),
@@ -29,15 +30,15 @@ public class SnakeLogic
     };
 
     public List<Transform> SnakeBody = new List<Transform>();
-
+    private List<Vector3> pathToApple = new List<Vector3>();
+    
     public delegate void OnPosChanged(Transform transform, Vector3 pos);
 
     public delegate void OnAppleEated();
 
     public event OnPosChanged Del = delegate { }; 
-    public event OnAppleEated Add;
+    public event OnAppleEated Add = delegate { };
     #endregion
-
     
     #region Methods
     
@@ -50,87 +51,117 @@ public class SnakeLogic
     public SnakeLogic(int snakeSize)
     {
         _snakeSize = snakeSize;
-        _headPosition = new Vector3(_x, _y, _z);
     }
 
+    public void SetSnakeParts(Snake snake)
+    {
+        _snake = snake;
+        snake.transform.GetChild(0).position = new Vector3(_xHead, _yHead, _zHead);
+        
+        for (int i = 0; i < local.general.snake.count; i++) 
+        {
+            snake.transform.GetChild(i).position = snake.transform.GetChild(0).position + new Vector3(i, 0, 0);
+            SnakeBody.Add(snake.transform.GetChild(i));
+        }
+    }
+    
     public void Move()
     {    
-        // SetGridInfo();
-        Vector3 direction = _appleFound ? GetMoveDirectionToApple() :  CheckFreeSpaceExeptItself();
+        if(!_appleFound)SearchApple();
         
-        Debug.Log("_headPosition = "  + _headPosition  + $" - {direction}");
-        Vector3 newPOs = _headPosition += direction;
+        Vector3 direction = _appleFound ? MoveToApple() : CheckFreeSpaceExeptItself();
         
-        _oldPosition = _headPosition; 
+        _oldPosition = SnakeBody[0].position;
         
-        Debug.Log("_headPosition = "  + _headPosition  + $" - {direction} + {newPOs}" );
+        Vector3 newPos = SnakeBody[0].position + direction;
         
-        Del(SnakeBody[0] , newPOs);
-        //_headPosition = newPOs;
-        LookForward(_headPosition, direction);
+        Del(SnakeBody[0], newPos);
         
         for (int i = 1; i < SnakeBody.Count; i++)
         {
             _oldPosition = SnakeBody[i - 1].position;
-            Del?.Invoke(SnakeBody[i] , _oldPosition);
+            Del.Invoke(SnakeBody[i] , _oldPosition);
         }
         
-        Snake._lastMove = Time.time;
+        Snake.lastMove = Time.time;
     }
-    
-    private void LookForward(Vector3 headPosition, Vector3 direction)
-    {   
-        int layerMask = 1 << 9;
 
-        if (Physics.Raycast(headPosition, direction, out var hit, Mathf.Infinity, layerMask))
+    public Vector3 MoveToApple()
+    {
+        if (pathToApple.Count == 0)
         {
-            _appleFound = true;
-            _applePosition = hit.transform.position;
+            CheckConnectionWithHead();
+            return CheckFreeSpaceExeptItself();
         }
-        else
+        
+        Vector3 direction = pathToApple[0];
+        pathToApple.RemoveAt(0);
+        
+        return direction;
+    }
+    
+    public void SearchApple()
+    {
+        Transform transform = Grid.SearchForApple();
+        
+        if ( transform != null)
         {
-            Debug.DrawLine(headPosition, direction, Color.white, 1f);
+            _applePosition = transform.position;
+            GetMoveDirectionToApple();
+            _appleFound = true;
         }
     }
     
-    private Vector3 GetMoveDirectionToApple()
+    private void GetMoveDirectionToApple()
     {
-        Debug.Log("GetMoveDirectionToApple");
+        Vector3 checkingPosition = SnakeBody[0].position;
+        Vector3 value = _applePosition  - checkingPosition; 
         
-        Vector3 value = _applePosition - _headPosition;  // gameObject.transform.GetChild(0).position;
-        int tmp = 0;
-        
-        if (value.x != 0.0f)
+        float xDistance = Mathf.Abs((int)value.x);
+        float yDistance = Mathf.Abs((int)value.y);
+        float zDistance = Mathf.Abs((int)value.z);
+
+        float xx = getPoint(value.x);
+        while (xDistance != 0)
         {
-            tmp = (int)Mathf.Abs(value.x / value.x);
-            if (value.x < 0)
-                tmp = tmp * (-1);
-            _directionToApple = new Vector3(tmp, value.y, value.z);
-        }
-        else if (value.y != 0.0f)
-        {
-            tmp = (int)Mathf.Abs(value.y / value.y);
-            if (value.y < 0)
-                tmp = tmp * (-1);
-            _directionToApple = new Vector3(value.x , tmp, value.z);
-        }
-        else if(value.z != 0.0f)
-        {
-            tmp = (int)Mathf.Abs(value.z / value.z);
-            if (value.z < 0)
-                tmp = tmp * (-1);
-            _directionToApple = new Vector3(value.x, value.y, tmp);
-            
+            xDistance--;
+            pathToApple.Add(new Vector3(xx, 0, 0));
         }
         
-        Debug.Log(tmp);
-        return _directionToApple;
+        float yy = getPoint(value.y);
+        while (yDistance != 0)
+        {
+            yDistance--;
+            pathToApple.Add(new Vector3(0, yy, 0));
+        }
         
+        float zz = getPoint(value.z);
+        while (zDistance != 0)
+        {
+            zDistance--;
+            pathToApple.Add(new Vector3(0, 0, zz));
+        }
+    }
+
+    public float getPoint(float value)
+    {
+        float dir  = 0f; 
+        
+        if (value < 0)
+        {
+            dir = -1f;
+        }
+        else if(value > 0)
+        {
+            dir = 1f;
+        }
+
+        return dir;
     }
     
     private Vector3 CheckFreeSpaceExeptItself()
     {
-        Vector3 direction = _headPosition; //gameObject.transform.GetChild(0).position;
+        Vector3 direction = SnakeBody[0].position;
         
         Random random = new Random();
         Vector3 randomDirectionToMove = directions[random.Next(0, directions.Length) ];
@@ -140,7 +171,7 @@ public class SnakeLogic
         int count = 10;
         while (Grid.GetTransformOnPoint(direction))
         {    
-            direction = _headPosition;
+            direction = SnakeBody[0].position;
             randomDirectionToMove = directions[random.Next(0, directions.Length)];
             direction += randomDirectionToMove;
             count--;
@@ -151,19 +182,16 @@ public class SnakeLogic
                 break;
             }
         }
-        
         return randomDirectionToMove;
-        
     }
     
     public void CheckConnectionWithHead()
     {
-        Add?.Invoke();
+        Transform apple = Grid.GetAppleByVector3(_applePosition);
+        apple.GetComponent<Apple>().DestrouItselfWhenEated();
         _appleFound = false;
-        Debug.Log("Success");
+        Add.Invoke();
     }
-    
-    
     
     #endregion
 }

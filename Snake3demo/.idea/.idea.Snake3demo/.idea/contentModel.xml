@@ -35,7 +35,6 @@
           <e p="Snake.cs" t="Include" />
           <e p="SnakeLogic.cs" t="Include" />
           <e p="SnakePosition.cs" t="Include" />
-          <e p="SnakeTrigger.cs" t="Include" />
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />

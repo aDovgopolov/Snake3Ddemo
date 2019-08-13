@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Apple : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-         // Debug.Log("Apple");
+        Grid.grid3D[(int)transform.position.y, (int)transform.position.x, (int)transform.position.z] = transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DestrouItselfWhenEated()
     {
-        
+        Destroy(gameObject);
     }
 }
