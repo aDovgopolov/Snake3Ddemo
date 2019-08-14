@@ -84,8 +84,14 @@ public class Grid
     
     public static bool GetTransformOnPoint(Vector3 vec)
     {
-        if (!InsideBorder3D(vec))
-            return false;
+        Vector3 v = RoundVec3(vec);
+        bool test = !InsideBorder3D(v);
+        Debug.Log($"test = {test}");
+        if (test)
+        {
+            Debug.Log("if (!InsideBorder3D(vec))");
+            return true;
+        }
         
         Transform transform = grid3D[(int)vec.x, (int)vec.y, (int)vec.z];
         bool isSomething = transform != null;

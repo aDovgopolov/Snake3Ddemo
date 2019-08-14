@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
@@ -8,16 +6,13 @@ public class SnakeLogic
 {
     #region Values
 
-    private static int _snakeSize;
     private Snake _snake;
-    private bool _appleFound;
-    private Vector3 _applePosition;
-    private Vector3 _directionToApple;
-    private Vector3 _oldPosition;
+    private SnakeData _snakeData;
     
-    private int _xHead = 5;
-    private int _yHead = 5;
-    private int _zHead = 8;
+    private const int ValueX = 1;
+    private const int ValueY = 2;
+    private const int ValueZ = 3;
+    private Vector3 _applePosition;
     
     private Vector3[] directions =
     {
@@ -33,45 +28,36 @@ public class SnakeLogic
     private List<Vector3> pathToApple = new List<Vector3>();
     
     public delegate void OnPosChanged(Transform transform, Vector3 pos);
-
+    public delegate void OnSnakeCreated();
     public delegate void OnAppleEated();
 
     public event OnPosChanged Del = delegate { }; 
     public event OnAppleEated Add = delegate { };
+    public event OnSnakeCreated Draw = delegate { };
     #endregion
     
     #region Methods
     
-    public void RegisterHandler(OnPosChanged del, OnAppleEated add)
+    public void RegisterHandler(OnPosChanged del, OnAppleEated add, OnSnakeCreated draw)
     {
         Del = del;
         Add = add;
+        Draw = draw;
     }
     
-    public SnakeLogic(int snakeSize)
-    {
-        _snakeSize = snakeSize;
-    }
-
-    public void SetSnakeParts(Snake snake)
+    public SnakeLogic(int snakeSize, Snake snake)
     {
         _snake = snake;
-        snake.transform.GetChild(0).position = new Vector3(_xHead, _yHead, _zHead);
-        
-        for (int i = 0; i < local.general.snake.count; i++) 
-        {
-            snake.transform.GetChild(i).position = snake.transform.GetChild(0).position + new Vector3(i, 0, 0);
-            SnakeBody.Add(snake.transform.GetChild(i));
-        }
+        _snakeData = new SnakeData(snakeSize, snake);
     }
     
     public void Move()
     {    
-        if(!_appleFound)SearchApple();
+        if(!_snakeData.AppleFound)SearchApple();
         
-        Vector3 direction = _appleFound ? MoveToApple() : CheckFreeSpaceExeptItself();
+        Vector3 direction = _snakeData.AppleFound ? MoveToApple() : CheckFreeSpaceExeptItself();
         
-        _oldPosition = SnakeBody[0].position;
+        Vector3 oldPosition = SnakeBody[0].position;
         
         Vector3 newPos = SnakeBody[0].position + direction;
         
@@ -79,8 +65,8 @@ public class SnakeLogic
         
         for (int i = 1; i < SnakeBody.Count; i++)
         {
-            _oldPosition = SnakeBody[i - 1].position;
-            Del.Invoke(SnakeBody[i] , _oldPosition);
+            oldPosition = SnakeBody[i - 1].position;
+            Del.Invoke(SnakeBody[i] , oldPosition);
         }
         
         Snake.lastMove = Time.time;
@@ -108,7 +94,7 @@ public class SnakeLogic
         {
             _applePosition = transform.position;
             GetMoveDirectionToApple();
-            _appleFound = true;
+            _snakeData.AppleFound = true;
         }
     }
     
@@ -116,34 +102,30 @@ public class SnakeLogic
     {
         Vector3 checkingPosition = SnakeBody[0].position;
         Vector3 value = _applePosition  - checkingPosition; 
-        
-        float xDistance = Mathf.Abs((int)value.x);
-        float yDistance = Mathf.Abs((int)value.y);
-        float zDistance = Mathf.Abs((int)value.z);
 
-        float xx = getPoint(value.x);
-        while (xDistance != 0)
-        {
-            xDistance--;
-            pathToApple.Add(new Vector3(xx, 0, 0));
-        }
-        
-        float yy = getPoint(value.y);
-        while (yDistance != 0)
-        {
-            yDistance--;
-            pathToApple.Add(new Vector3(0, yy, 0));
-        }
-        
-        float zz = getPoint(value.z);
-        while (zDistance != 0)
-        {
-            zDistance--;
-            pathToApple.Add(new Vector3(0, 0, zz));
-        }
+        CreatePathBy(value.x, ValueX);
+        CreatePathBy(value.y, ValueY);
+        CreatePathBy(value.z, ValueZ);
     }
 
-    public float getPoint(float value)
+    private void CreatePathBy(float value, int valueChecker)
+    {   
+        float distance = Mathf.Abs((int)value);
+        float target = getPoint(value);
+        
+        while (distance != 0)
+        {
+            distance--;
+            if(valueChecker == ValueX)
+                pathToApple.Add(new Vector3(target,0, 0));
+            else if(valueChecker == ValueY)
+                pathToApple.Add(new Vector3(0,target, 0));
+            else
+                pathToApple.Add(new Vector3(0,0, target));
+        }
+    }
+    
+    private float getPoint(float value)
     {
         float dir  = 0f; 
         
@@ -168,19 +150,23 @@ public class SnakeLogic
         
         direction += randomDirectionToMove;
         
-        int count = 10;
+        int count = 0;
         while (Grid.GetTransformOnPoint(direction))
         {    
-            direction = SnakeBody[0].position;
-            randomDirectionToMove = directions[random.Next(0, directions.Length)];
-            direction += randomDirectionToMove;
-            count--;
-            
-            if (count < 0)
+            if (count == 6)
             {
                 Debug.LogError("CheckFreeSpaceExeptItself: no free space");
+                Debug.Break();
                 break;
             }
+            
+            direction = SnakeBody[0].position;
+            randomDirectionToMove = directions[count];
+            direction += randomDirectionToMove;
+            Debug.Log($"count = {count } + direction = {direction}  + _appleFound {_snakeData.AppleFound}");
+            count++;
+            Debug.Break();
+            
         }
         return randomDirectionToMove;
     }
@@ -189,9 +175,14 @@ public class SnakeLogic
     {
         Transform apple = Grid.GetAppleByVector3(_applePosition);
         apple.GetComponent<Apple>().DestrouItselfWhenEated();
-        _appleFound = false;
+        _snakeData.AppleFound = false;
         Add.Invoke();
+        _snakeData.SnakeSize++;
     }
     
+    public int GetSnakeSize()
+    {
+        return _snakeData.SnakeSize;
+    }
     #endregion
 }

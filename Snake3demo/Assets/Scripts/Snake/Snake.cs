@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using Random = System.Random;
+﻿using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Serialization;
 
@@ -16,9 +13,8 @@ public class Snake : MonoBehaviour
     private void Start()
     {    
         local.init("local");
-        _snakeLogic = new SnakeLogic(local.general.snake.count);
-        _snakeLogic.RegisterHandler(ChangePos, SnakeGrow);
-        _snakeLogic.SetSnakeParts(this);
+        _snakeLogic = new SnakeLogic(local.general.snake.count, this);
+        _snakeLogic.RegisterHandler(ChangePos, SnakeGrow, DrawSnake);
         
         SetGridInfo();
     }
@@ -37,24 +33,33 @@ public class Snake : MonoBehaviour
         mySequence.Append(objectTransform.DOMove(newPos, 1));
         SetGridInfo();
     }
+
+    private void DrawSnake()
+    {
+        
+    }
     
     private void SnakeGrow()
     {
-        int index = transform.GetChildCount();
-        Vector3 newSnakePartPos = transform.GetChild(index  - 1).transform.position;
+        Vector3 newSnakePartPos = transform.GetChild(_snakeLogic.GetSnakeSize()  - 1).transform.position;
         GameObject _snakePart = Instantiate(snakePart, newSnakePartPos, Quaternion.identity);
         _snakePart.transform.parent = transform;
         _snakeLogic.SnakeBody.Add(_snakePart.transform);
     }
     
-    public void SetGridInfo()
+    private void SetGridInfo()
     {
         if (Grid.IsValidGridPos3D(this))
         {
             Grid.UpdateGrid3D(this);
         }
+        else
+        {
+            Debug.Log("Debug SetGridInfo");
+            Debug.Break();
+        }
     }
-
+    
     public void CheckConnectionWithHead()
     {
         _snakeLogic.CheckConnectionWithHead();

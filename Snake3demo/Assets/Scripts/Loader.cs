@@ -8,11 +8,11 @@ using UnityEngine;
 
 public class Loader : MonoBehaviour
 {
-    public SnakePosition snakePosition;
+   // public SnakePosition snakePosition;
 
     private void Awake()
     {
-        snakePosition = Deserialize<SnakePosition>("Assets\\Resources\\riddle2.xml");
+       // snakePosition = Deserialize<SnakePosition>("Assets\\Resources\\riddle2.xml");
     }
     
     public static T Deserialize<T>(string path)

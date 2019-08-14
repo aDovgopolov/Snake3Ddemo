@@ -5,14 +5,14 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Apple.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Apple.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ConfigReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ConfigReader.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Grid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Snake.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Snake.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakeTrigger.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakeTrigger.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Loader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Loader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Snake.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Snake.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs.meta" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,13 +24,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Snake.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ConfigReader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Loader.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Grid.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Snake/SnakeData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Snake/IDataManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Snake/SnakeLogic.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Snake/Snake.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Apple.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -41,14 +42,18 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/loader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Local.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/OtherTests/testRay.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Loader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SnakeTrigger.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ConfigReader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Apple.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Snake.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Loader.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Snake/IDataManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Snake/Snake.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Snake/SnakeData.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Snake/SnakeLogic.cs" />
       </list>
     </option>
   </component>
@@ -118,7 +123,8 @@
       <workItem from="1565590913719" duration="20535000" />
       <workItem from="1565623867530" duration="299000" />
       <workItem from="1565677935728" duration="441000" />
-      <workItem from="1565678436080" duration="23613000" />
+      <workItem from="1565678436080" duration="25879000" />
+      <workItem from="1565762796508" duration="6128000" />
     </task>
     <servers />
   </component>
@@ -132,7 +138,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -186,19 +194,6 @@
           <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs</url>
-          <line>99</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs" initialLine="97">
-            <startOffsets>
-              <option value="2575" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2592" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
