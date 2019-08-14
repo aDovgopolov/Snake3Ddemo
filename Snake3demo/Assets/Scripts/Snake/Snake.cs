@@ -16,7 +16,7 @@ public class Snake : MonoBehaviour
         _snakeLogic = new SnakeLogic(local.general.snake.count, this);
         _snakeLogic.RegisterHandler(ChangePos, SnakeGrow, DrawSnake);
         
-        SetGridInfo();
+        //SetGridInfo();
     }
 
     void Update()
@@ -31,7 +31,7 @@ public class Snake : MonoBehaviour
     {
         Sequence mySequence = DOTween.Sequence();
         mySequence.Append(objectTransform.DOMove(newPos, 1));
-        SetGridInfo();
+        _snakeLogic.SetGridInfo();
     }
 
     private void DrawSnake()
@@ -44,24 +44,15 @@ public class Snake : MonoBehaviour
         Vector3 newSnakePartPos = transform.GetChild(_snakeLogic.GetSnakeSize()  - 1).transform.position;
         GameObject _snakePart = Instantiate(snakePart, newSnakePartPos, Quaternion.identity);
         _snakePart.transform.parent = transform;
-        _snakeLogic.SnakeBody.Add(_snakePart.transform);
+        _snakeLogic.AddBoneToSnakeBody(_snakePart.transform);
     }
     
-    private void SetGridInfo()
+    
+    
+    void OnApplicationQuit()
     {
-        if (Grid.IsValidGridPos3D(this))
-        {
-            Grid.UpdateGrid3D(this);
-        }
-        else
-        {
-            Debug.Log("Debug SetGridInfo");
-            Debug.Break();
-        }
+        _snakeLogic.Save();
+        Debug.Log("Application ending after " + Time.time + " seconds");
     }
     
-    public void CheckConnectionWithHead()
-    {
-        _snakeLogic.CheckConnectionWithHead();
-    }
 }

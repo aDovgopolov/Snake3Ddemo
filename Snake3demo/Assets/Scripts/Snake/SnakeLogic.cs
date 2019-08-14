@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 using UnityEngine;
 using Random = System.Random;
 
@@ -6,15 +8,14 @@ public class SnakeLogic
 {
     #region Values
 
-    private Snake _snake;
-    private SnakeData _snakeData;
+    private readonly Snake _snake;
+    private readonly SnakeData _snakeData;
     
     private const int ValueX = 1;
     private const int ValueY = 2;
     private const int ValueZ = 3;
-    private Vector3 _applePosition;
     
-    private Vector3[] directions =
+    private readonly Vector3[] _directions =
     {
         new Vector3(0, -1, 0),
         new Vector3(0, 1, 0),
@@ -23,9 +24,8 @@ public class SnakeLogic
         new Vector3(0, 0, 1),
         new Vector3(0, 0, -1)
     };
-
-    public List<Transform> SnakeBody = new List<Transform>();
-    private List<Vector3> pathToApple = new List<Vector3>();
+    
+    #region Delegates
     
     public delegate void OnPosChanged(Transform transform, Vector3 pos);
     public delegate void OnSnakeCreated();
@@ -34,9 +34,6 @@ public class SnakeLogic
     public event OnPosChanged Del = delegate { }; 
     public event OnAppleEated Add = delegate { };
     public event OnSnakeCreated Draw = delegate { };
-    #endregion
-    
-    #region Methods
     
     public void RegisterHandler(OnPosChanged del, OnAppleEated add, OnSnakeCreated draw)
     {
@@ -45,28 +42,60 @@ public class SnakeLogic
         Draw = draw;
     }
     
+    #endregion
+    
+    #endregion
+    
+    #region Methods
+    
     public SnakeLogic(int snakeSize, Snake snake)
     {
         _snake = snake;
         _snakeData = new SnakeData(snakeSize, snake);
+        //_snakeData = Deserialize<SnakeData>("Assets\\Resources\\SnakeData.xml");
+        //_snakeData.setSnakeUI(snake);
+        
+        string str = Application.dataPath + $"\\Resources\\SnakeData.xml";
+        
+        if (File.Exists(str))
+        {
+            _snakeData = Deserialize<SnakeData>($"Assets\\Resources\\SnakeData.xml");
+            _snakeData.setSnakeUI(snake);
+            Debug.Log(str);
+        }
+        else
+        {
+            _snakeData = new SnakeData(snakeSize, snake);
+        }
+        
+        SetGridInfo();
+    }
+    
+    public static SnakeData Deserialize<SnakeData>(string path)
+    {
+        XmlSerializer serializer = new XmlSerializer(typeof(SnakeData));
+        StreamReader reader = new StreamReader(path);
+        SnakeData deserialized = (SnakeData) serializer.Deserialize(reader.BaseStream);
+        reader.Close();
+        return deserialized;
     }
     
     public void Move()
     {    
-        if(!_snakeData.AppleFound)SearchApple();
+        if(!_snakeData.AppleFound) SearchApple();
         
         Vector3 direction = _snakeData.AppleFound ? MoveToApple() : CheckFreeSpaceExeptItself();
         
-        Vector3 oldPosition = SnakeBody[0].position;
+        Vector3 oldPosition = _snakeData.snakeBody[0].position;
         
-        Vector3 newPos = SnakeBody[0].position + direction;
+        Vector3 newPos = _snakeData.snakeBody[0].position + direction;
         
-        Del(SnakeBody[0], newPos);
+        Del(_snakeData.snakeBody[0], newPos);
         
-        for (int i = 1; i < SnakeBody.Count; i++)
+        for (int i = 1; i < _snakeData.snakeBody.Count; i++)
         {
-            oldPosition = SnakeBody[i - 1].position;
-            Del.Invoke(SnakeBody[i] , oldPosition);
+            oldPosition = _snakeData.snakeBody[i - 1].position;
+            Del(_snakeData.snakeBody[i] , oldPosition);
         }
         
         Snake.lastMove = Time.time;
@@ -74,14 +103,14 @@ public class SnakeLogic
 
     public Vector3 MoveToApple()
     {
-        if (pathToApple.Count == 0)
+        if (_snakeData.pathToApple.Count == 0)
         {
             CheckConnectionWithHead();
             return CheckFreeSpaceExeptItself();
         }
         
-        Vector3 direction = pathToApple[0];
-        pathToApple.RemoveAt(0);
+        Vector3 direction = _snakeData.pathToApple[0];
+        _snakeData.pathToApple.RemoveAt(0);
         
         return direction;
     }
@@ -92,7 +121,7 @@ public class SnakeLogic
         
         if ( transform != null)
         {
-            _applePosition = transform.position;
+            _snakeData.ApplePosition = transform.position;
             GetMoveDirectionToApple();
             _snakeData.AppleFound = true;
         }
@@ -100,8 +129,8 @@ public class SnakeLogic
     
     private void GetMoveDirectionToApple()
     {
-        Vector3 checkingPosition = SnakeBody[0].position;
-        Vector3 value = _applePosition  - checkingPosition; 
+        Vector3 checkingPosition = _snakeData.snakeBody[0].position;
+        Vector3 value = _snakeData.ApplePosition  - checkingPosition; 
 
         CreatePathBy(value.x, ValueX);
         CreatePathBy(value.y, ValueY);
@@ -117,11 +146,11 @@ public class SnakeLogic
         {
             distance--;
             if(valueChecker == ValueX)
-                pathToApple.Add(new Vector3(target,0, 0));
+                _snakeData.pathToApple.Add(new Vector3(target,0, 0));
             else if(valueChecker == ValueY)
-                pathToApple.Add(new Vector3(0,target, 0));
+                _snakeData.pathToApple.Add(new Vector3(0,target, 0));
             else
-                pathToApple.Add(new Vector3(0,0, target));
+                _snakeData.pathToApple.Add(new Vector3(0,0, target));
         }
     }
     
@@ -143,10 +172,10 @@ public class SnakeLogic
     
     private Vector3 CheckFreeSpaceExeptItself()
     {
-        Vector3 direction = SnakeBody[0].position;
+        Vector3 direction = _snakeData.snakeBody[0].position;
         
         Random random = new Random();
-        Vector3 randomDirectionToMove = directions[random.Next(0, directions.Length) ];
+        Vector3 randomDirectionToMove = _directions[random.Next(0, _directions.Length) ];
         
         direction += randomDirectionToMove;
         
@@ -156,24 +185,23 @@ public class SnakeLogic
             if (count == 6)
             {
                 Debug.LogError("CheckFreeSpaceExeptItself: no free space");
-                Debug.Break();
+                //Debug.Break();
                 break;
             }
             
-            direction = SnakeBody[0].position;
-            randomDirectionToMove = directions[count];
+            direction = _snakeData.snakeBody[0].position;
+            randomDirectionToMove = _directions[count];
             direction += randomDirectionToMove;
-            Debug.Log($"count = {count } + direction = {direction}  + _appleFound {_snakeData.AppleFound}");
             count++;
-            Debug.Break();
-            
+            //Debug.Break();
         }
+        
         return randomDirectionToMove;
     }
     
     public void CheckConnectionWithHead()
     {
-        Transform apple = Grid.GetAppleByVector3(_applePosition);
+        Transform apple = Grid.GetAppleByVector3(_snakeData.ApplePosition);
         apple.GetComponent<Apple>().DestrouItselfWhenEated();
         _snakeData.AppleFound = false;
         Add.Invoke();
@@ -184,5 +212,29 @@ public class SnakeLogic
     {
         return _snakeData.SnakeSize;
     }
+    
+    public void SetGridInfo()
+    {
+        if (Grid.IsValidGridPos3D(_snake))
+        {
+            Grid.UpdateGrid3D(_snake);
+        }
+        else
+        {
+            Debug.Log("Debug SetGridInfo");
+            //Debug.Break();
+        }
+    }
+
+    public void AddBoneToSnakeBody(Transform _snakePart)
+    {
+        _snakeData.snakeBody.Add(_snakePart.transform);
+    }
+
+    public void Save()
+    {
+        _snakeData.Save();
+    }
+
     #endregion
 }

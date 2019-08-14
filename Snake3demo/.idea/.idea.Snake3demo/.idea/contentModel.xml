@@ -25,6 +25,7 @@
           <e p="local.xml" t="Include" />
           <e p="riddle.xml" t="Include" />
           <e p="riddle2.xml" t="Include" />
+          <e p="SnakeData.xml" t="Include" />
         </e>
         <e p="Scripts" t="Include">
           <e p="Apple.cs" t="Include" />

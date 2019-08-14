@@ -9335,10 +9335,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74307b4af235984e8737161550b7019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakePosition:
-    x: 0
-    y: 0
-    z: 0
 --- !u!1001 &1947737382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10943,6 +10939,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903161120604483543, guid: c48214df24b31854b9b6a1a35b012be9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903161118854212514, guid: c48214df24b31854b9b6a1a35b012be9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5571717653264581027, guid: c48214df24b31854b9b6a1a35b012be9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102861700435736053, guid: c48214df24b31854b9b6a1a35b012be9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c48214df24b31854b9b6a1a35b012be9, type: 3}

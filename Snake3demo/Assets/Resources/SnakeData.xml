@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<SnakeData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <xmlSnake>
+    <Vector3>
+      <x>3.00009918</x>
+      <y>4.462067</y>
+      <z>8</z>
+    </Vector3>
+    <Vector3>
+      <x>2.538032</x>
+      <y>5</y>
+      <z>8</z>
+    </Vector3>
+    <Vector3>
+      <x>2.00009918</x>
+      <y>5.462067</y>
+      <z>8</z>
+    </Vector3>
+    <Vector3>
+      <x>2.00009918</x>
+      <y>6</y>
+      <z>8.462067</z>
+    </Vector3>
+    <Vector3>
+      <x>2.00009918</x>
+      <y>6</y>
+      <z>9.462067</z>
+    </Vector3>
+    <Vector3>
+      <x>2.00009918</x>
+      <y>6</y>
+      <z>10.4620667</z>
+    </Vector3>
+  </xmlSnake>
+  <pathToApple />
+  <SnakeSize>6</SnakeSize>
+  <AppleFound>false</AppleFound>
+  <ApplePosition>
+    <x>2</x>
+    <y>6</y>
+    <z>8</z>
+  </ApplePosition>
+</SnakeData>

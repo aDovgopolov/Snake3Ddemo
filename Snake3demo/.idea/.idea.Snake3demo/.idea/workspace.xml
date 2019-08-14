@@ -6,13 +6,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Snake3demo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Grid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Loader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Loader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Snake.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Snake.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Local.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Local.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Snake/Snake.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Snake/Snake.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Snake/SnakeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Snake/SnakeData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Snake/SnakeLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Snake/SnakeLogic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,20 +40,20 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/QuestionData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/OtherTests/Hero.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/loader.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Local.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/OtherTests/testRay.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SnakePosition.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SnakeTrigger.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ConfigReader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Apple.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Snake.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SnakeLogic.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Loader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Snake/IDataManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Snake/Snake.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Snake/SnakeData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Snake/SnakeLogic.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Snake/SnakeData.cs" />
       </list>
     </option>
   </component>
@@ -76,7 +76,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="CodeLensConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -98,10 +98,10 @@
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="1488">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="6592">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="1488" />
+      <option name="pid" value="6592" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -124,7 +124,7 @@
       <workItem from="1565623867530" duration="299000" />
       <workItem from="1565677935728" duration="441000" />
       <workItem from="1565678436080" duration="25879000" />
-      <workItem from="1565762796508" duration="6128000" />
+      <workItem from="1565762796508" duration="19337000" />
     </task>
     <servers />
   </component>
@@ -184,6 +184,8 @@
     <state width="2517" height="376" key="GridCell.Tab.3.right/3840.2160" />
     <state x="992" y="391" key="RiderGenerateDialog" />
     <state x="992" y="391" key="RiderGenerateDialog/3840.2160" />
+    <state x="752" y="433" key="SettingsEditor" />
+    <state x="752" y="433" key="SettingsEditor/3840.2160" />
     <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" />
     <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/3840.2160" />
   </component>
