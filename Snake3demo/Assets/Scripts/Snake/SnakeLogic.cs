@@ -52,22 +52,7 @@ public class SnakeLogic
     {
         _snake = snake;
         _snakeData = new SnakeData(snakeSize, snake);
-        //_snakeData = Deserialize<SnakeData>("Assets\\Resources\\SnakeData.xml");
-        //_snakeData.setSnakeUI(snake);
-        
-        string str = Application.dataPath + $"\\Resources\\SnakeData.xml";
-        
-        if (File.Exists(str))
-        {
-            _snakeData = Deserialize<SnakeData>($"Assets\\Resources\\SnakeData.xml");
-            _snakeData.setSnakeUI(snake);
-            Debug.Log(str);
-        }
-        else
-        {
-            _snakeData = new SnakeData(snakeSize, snake);
-        }
-        
+
         SetGridInfo();
     }
     
@@ -97,7 +82,8 @@ public class SnakeLogic
             oldPosition = _snakeData.snakeBody[i - 1].position;
             Del(_snakeData.snakeBody[i] , oldPosition);
         }
-        
+
+        //_snakeData.Save();
         Snake.lastMove = Time.time;
     }
 
@@ -229,11 +215,6 @@ public class SnakeLogic
     public void AddBoneToSnakeBody(Transform _snakePart)
     {
         _snakeData.snakeBody.Add(_snakePart.transform);
-    }
-
-    public void Save()
-    {
-        _snakeData.Save();
     }
 
     #endregion

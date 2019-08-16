@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Xml.Serialization;
+using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Serialization;
 
@@ -6,7 +7,9 @@ public class Snake : MonoBehaviour
 {    
     private SnakeLogic _snakeLogic;
     public static float lastMove = 1f;
-    
+    // kostul
+    [XmlIgnore]
+    public bool dataLoaded = false;
     [FormerlySerializedAs("_snakePart")] [SerializeField]  
     private GameObject snakePart;
     
@@ -21,7 +24,7 @@ public class Snake : MonoBehaviour
 
     void Update()
     {
-        if (Time.time - lastMove >= 1f )
+        if (Time.time - lastMove >= 1f && dataLoaded)
         {    
             _snakeLogic.Move();
         }
@@ -47,12 +50,10 @@ public class Snake : MonoBehaviour
         _snakeLogic.AddBoneToSnakeBody(_snakePart.transform);
     }
     
-    
-    
-    void OnApplicationQuit()
+    /*void OnApplicationQuit()
     {
         _snakeLogic.Save();
         Debug.Log("Application ending after " + Time.time + " seconds");
-    }
-    
+    }*/
+
 }
